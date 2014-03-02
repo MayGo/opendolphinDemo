@@ -15,8 +15,8 @@ grails.project.groupId = appName // change this to alter the default package nam
 
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
 grails.mime.disable.accept.header.userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
-grails.mime.types = [ // the first one is the default format
-    all:           '*/*', // 'all' maps to '*' or the first available format in withFormat
+grails.mime.types = [
+    all:           '*/*',
     atom:          'application/atom+xml',
     css:           'text/css',
     csv:           'text/csv',
@@ -34,9 +34,10 @@ grails.mime.types = [ // the first one is the default format
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.cache.maxsize = 1000
 
+grail.tomcat.nio = true // make long-poll friendly
+
 // What URL patterns should be processed by the resources plugin
 grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
-grails.resources.adhoc.excludes = ['/WEB-INF/**']
 
 // Legacy setting for codec used to encode data with ${}
 grails.views.default.codec = "html"
@@ -59,10 +60,11 @@ grails {
             }
         }
         // escapes all not-encoded output at final stage of outputting
-        // filteringCodecForContentType.'text/html' = 'html'
+        filteringCodecForContentType {
+            //'text/html' = 'html'
+        }
     }
 }
-
  
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration
@@ -112,4 +114,16 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+
+    info  "org.opendolphin.core.server",
+           'org.codehaus.groovy.grails.web.servlet'
 }
+
+cors.header = [
+     "Access-Control-Allow-Origin"        : "",
+     "Access-Control-Allow-Credentials"   : "true",
+     "Access-Control-Allow-Methods"       : "OPTIONS, POST, GET",
+     "Access-Control-Allow-Headers"       : "X-Requested-With,X-Prototype-Version,Content-Type,Cache-Control,Pragma,Origin",
+     "Access-Control-Max-Age"             : "600",
+     "Access-Control-Expose-Headers"      : "Access-Control-Allow-Origin",
+]
