@@ -67,6 +67,7 @@ public class Application extends javafx.application.Application {
                 clientDolphin.send(COMMAND_ID, new OnFinishedHandlerAdapter() {
                     @Override
                     public void onFinished(List<ClientPresentationModel> presentationModels) {
+					System.out.println("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii...");
                         textAttributeModel.getAt(ATT_ATTR_ID).rebase();
                     }
                 });
